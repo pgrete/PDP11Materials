@@ -1,0 +1,11 @@
+# (La)TeX junk
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+
+# Vim junk
+*~
+
+# Jupyter junk
+.ipynb_checkpoints/
