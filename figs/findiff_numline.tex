@@ -1,0 +1,70 @@
+\documentclass[tikz]{article}
+\usepackage{pgf,tikz}
+\usepackage{pgfplots}
+\usepackage[utf8]{inputenc}
+
+%For overleaf%
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+
+\usepackage{amsmath}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations}
+
+\begin{document}
+\begin{tikzpicture}[decoration={brace}]
+	%Draw the base line for the numberline
+	\draw (-3.5,0) -- (3.5,0);
+    %Draw the ticks
+	\foreach \x in {-3,-2,-1,0,1,2,3} 
+		\draw[shift={(\x,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
+    %Draw central tick label
+    \draw[color=black] (0pt,0pt) -- (0pt,-3pt) node[below] {$x_{i}$};
+    %Draw positive tick labels
+	\foreach \x in {1,2,3}
+		\draw[shift={(\x,0)},color=black] (0pt,0pt) -- (0pt,-3pt)
+        node[below] {$x_{i+\x}$};
+    %Draw negative tick labels
+	\foreach \x in {-3,-2,-1}
+		\draw[shift={(\x,0)},color=black] (0pt,0pt) -- (0pt,-3pt)
+        node[below] {$x_{i\x}$};
+    %Draw an example f(x) in red
+    \draw [red] (-3,0.5) to  [out=45,in=180] (-2,1)
+        to [out=0,in=180] (-1,0.5)
+        to [out=0,in=225] (0,1.0)
+        to [out=45,in=215] (1,1.5)
+        to [out=35,in=135] (3.0,0.25);
+    
+    %Draw lines illustrating delta x
+    \draw[color=blue] (0.0,1.0) -- (1.0,1.0);
+    \draw[decorate,color=blue] (1.0,0.9) -- (0.0,0.9)
+    node [very near start,anchor=north,inner sep=5pt, outer sep=1pt]{$\Delta x = x_{i+1} - x_i$};
+    %delta f
+    \draw[color=blue] (1.0,1.0) -- (1.0,1.5);
+    \draw[decorate,color=blue] (1.1,1.5) -- (1.1,1.0)
+    node [very near start,right,inner sep=5pt, outer sep=1pt]{};
+    \draw [blue] (1.05, 1.25) node[right] {$\Delta f = ~~ f_{i+1} - f_i$};
+
+    %Draw a label for f(x), slope df/dx at x_i
+    \draw [red] (-3.0, 1.5) node[above] {$f(x)$};
+    %\draw [purple] (-1.75,1.5) node[above] {$\frac{df}{dx}|_{x_i}$};
+    
+    %Draw label and markers for discrete quantities
+    \fill [blue] (0.0,1.0) circle (2pt);  %x_i
+    \draw [blue] (-0.1,1.5) node[above] {$f_i \equiv f(x_i)$}; %f_i label
+    %\fill [blue] (-1.0,0.0) circle (2pt); %x_i-1
+    \fill [blue] (1.0,1.5) circle (2pt); %x_i+1
+
+    %Draw the slope df/dx at x_i
+    %\draw [purple] (-1.0,0.0) to (1.0,2.0);
+
+    %Draw the bounding box, useful for debugging
+    %\draw [brown] (current bounding box.south west) rectangle (current bounding box.north east);
+    
+\end{tikzpicture}
+\end{document}
+
